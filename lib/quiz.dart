@@ -27,16 +27,17 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(context) {
+    Widget screenChange = MainScreen(switchScreen);
+    if (activeScreen == 'questions_screen') {
+      screenChange = const Question();
+    }
     return MaterialApp(
       home: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 182, 9, 245),
-          ),
-          child: activeScreen == 'start_screen'
-              ? MainScreen(switchScreen)
-              : const Question(),
-        ),
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 182, 9, 245),
+            ),
+            child: screenChange),
       ),
     );
   }
