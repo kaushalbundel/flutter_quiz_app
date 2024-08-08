@@ -19,9 +19,9 @@ class ResultsSummary extends StatelessWidget {
                   width: 20,
                   height: 20,
                   alignment: Alignment.topCenter,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color.fromARGB(255, 246, 243, 243)),
+                      color: data['answerColor'] as Color),
                   child: Text(
                     ((data['question_index'] as int) + 1).toString(),
                   ),

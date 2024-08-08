@@ -36,6 +36,8 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+//change screen on the last page (results page)
+
   @override
   Widget build(context) {
     Widget screenChange = MainScreen(switchScreen);
@@ -45,9 +47,17 @@ class _QuizState extends State<Quiz> {
       );
     }
 
+    moveToMainScreen() {
+      setState(() {
+        givenAnswers = [];
+        activeScreen = 'start_screen';
+      });
+    }
+
     if (activeScreen == 'results_screen') {
       screenChange = ResultsScreen(
         selectedAnswers: givenAnswers,
+        backToMainScreen: moveToMainScreen,
       );
     }
     return MaterialApp(

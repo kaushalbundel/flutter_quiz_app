@@ -3,8 +3,15 @@ import 'package:quiz_app/data/questions_list.dart';
 import 'package:quiz_app/results_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.selectedAnswers});
+  const ResultsScreen(
+      {super.key,
+      required this.selectedAnswers,
+      required this.backToMainScreen});
+
   final List<String> selectedAnswers;
+
+// last page -> main screen
+  final Function backToMainScreen;
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
     for (var i = 0; i < selectedAnswers.length; i++) {
@@ -13,7 +20,10 @@ class ResultsScreen extends StatelessWidget {
           'question_index': i,
           'question': questionList[i].text,
           'correctAnswers': questionList[i].answers[0],
-          'userAnswers': selectedAnswers[i]
+          'userAnswers': selectedAnswers[i],
+          'answerColor': (questionList[i].answers[0] == selectedAnswers[i])
+              ? Colors.green
+              : Colors.red
         },
       );
     }
@@ -23,10 +33,12 @@ class ResultsScreen extends StatelessWidget {
   @override
   Widget build(context) {
     final summaryData = getSummaryData();
+    // To delete
     int getTotalQuestions = questionList.length;
     int getCorrectAnswers = summaryData.where((data) {
       return data['correctAnswers'] == data['userAnswers'];
     }).length;
+
     return Center(
       child: Container(
         padding: const EdgeInsets.all(16.0),
@@ -49,7 +61,9 @@ class ResultsScreen extends StatelessWidget {
               height: 40,
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                backToMainScreen;
+              },
               label: const Text("Start Again"),
               icon: const Icon(
                 Icons.arrow_back,
