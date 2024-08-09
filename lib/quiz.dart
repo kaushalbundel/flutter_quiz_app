@@ -38,6 +38,13 @@ class _QuizState extends State<Quiz> {
 
 //change screen on the last page (results page)
 
+  moveToMainScreen() {
+    setState(() {
+      givenAnswers = [];
+      activeScreen = 'start_screen';
+    });
+  }
+
   @override
   Widget build(context) {
     Widget screenChange = MainScreen(switchScreen);
@@ -45,13 +52,6 @@ class _QuizState extends State<Quiz> {
       screenChange = Question(
         onSelectAnswer: captureAnswer,
       );
-    }
-
-    moveToMainScreen() {
-      setState(() {
-        givenAnswers = [];
-        activeScreen = 'start_screen';
-      });
     }
 
     if (activeScreen == 'results_screen') {

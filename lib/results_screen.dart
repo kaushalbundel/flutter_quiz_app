@@ -11,7 +11,7 @@ class ResultsScreen extends StatelessWidget {
   final List<String> selectedAnswers;
 
 // last page -> main screen
-  final Function backToMainScreen;
+  final Function()? backToMainScreen;
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
     for (var i = 0; i < selectedAnswers.length; i++) {
@@ -61,9 +61,7 @@ class ResultsScreen extends StatelessWidget {
               height: 40,
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                backToMainScreen;
-              },
+              onPressed: backToMainScreen,
               label: const Text("Start Again"),
               icon: const Icon(
                 Icons.arrow_back,
